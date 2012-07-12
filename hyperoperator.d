@@ -1,3 +1,8 @@
+/*
+ * Hyperoperator
+ * Copyright 2012 James Otten <james_otten@lavabit.com>
+*/
+
 import std.stdio;
 
 //Template for the hyperoperator
