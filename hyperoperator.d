@@ -25,5 +25,13 @@ unittest {
 }
 
 void main() {
-	writeln(hyper(1, 2, 3));
+	ulong a, b, n;
+	writeln("hyperoperator(n, a, b)");
+	writeln("Enter n:");
+	stdin.readf(" %d", &n);
+	writeln("Enter a:");
+	stdin.readf(" %d", &a);
+	writeln("Enter b:");
+	stdin.readf(" %d", &b);
+	writefln("hyperoperator(%d, %d, %d) = %d", n, a, b, hyper(n, a, b));
 }
