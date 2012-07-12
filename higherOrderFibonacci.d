@@ -24,8 +24,20 @@ ulong fib(in ulong k, in ulong n) {
 	return seq[n];
 }
 
+unittest {
+	assert(fib(2, 1) == 0);
+	assert(fib(2, 2) == 1);
+	assert(fib(2, 3) == 1);
+	assert(fib(2, 4) == 2);
+	assert(fib(3, 1) == 0);
+	assert(fib(3, 2) == 0);
+	assert(fib(3, 3) == 1);
+	assert(fib(3, 4) == 1);
+	assert(fib(3, 5) == 2);
+	assert(fib(5, 10) == 16);
+}
+
 void main() {
-	//writeln(fib(3, 5));
 	ulong k, n;
 	writeln("Enter the order of the higher order fibonacci sequence:");
 	stdin.readf(" %d", &k);
