@@ -24,3 +24,4 @@ debug: $(BINDIR)/$(TARGET)
 clean:
 	rm -f $(OBJDIR)/*.o
 	rm -f $(BINDIR)/*
+	cd graph; make clean
