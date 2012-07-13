@@ -8,6 +8,8 @@ Code written while learning D.
 * hyperoperator.d - Recursive implementation of the hyperoperator [Wikipedia](https://en.wikipedia.org/wiki/Hyperoperation)
 * missing.d - Which number from a range is missing?
 * binaryTrees.d - Fun with binary trees and class templates.
+* graph/graph.d - Graph library which is a class template.
+* graph/graphTest.d - Small test program that uses graph.d.
 
 ####Building:
 Debug: `make debug`
