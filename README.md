@@ -9,7 +9,9 @@ Code written while learning D.
 * missing.d - Which number from a range is missing?
 * binaryTrees.d - Fun with binary trees and class templates.
 * graph/graph.d - Graph library which is a class template.
-* graph/graphTest.d - Small test program that uses graph.d.
+* graph/deque.d - Simple deque using a dynamic array.
+* graph/breadthFirstSearch.d - Breadth First Search for my graph type (graph/graph.d).
+* graph/graphTest.d - Small test program that uses graph.d, deque.d, breadthFirstSearch.d.
 
 ####Building:
 Debug: `make debug`
