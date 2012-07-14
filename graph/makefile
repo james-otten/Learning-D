@@ -5,15 +5,18 @@ DC = dmd
 DFLAGS = -inline -O -release
 GDB = -unittest -debug -gc -w -wi
 
-LIBOBJS = graph.o
-TARGET = graph
+LIBOBJS = graph.o deque.o breadthFirstSearch.o
+LIBSRC = graph.d deque.d breadthFirstSearch.d
+TARGET = graphTest
 SOURCE = graphTest.d
 
-all: $(LIBOBJS) 
-	$(DC) $(LIBOBJS) $(SOURCE) $(DFLAGS)
+all: $(LIBOBJS) $(TARGET)
 
-$(LIBOBJS): graph.d
-	$(DC) $< $(DFLAGS) -c
+$(TARGET): $(OBJS)
+	$(DC) $^ $(LIBOBJS) $(SOURCE) -of$@
+
+$(LIBOBJS): $(LIBSRC)
+	$(DC) $^ $(DFLAGS) -c
 
 debug: DFLAGS = $(GDB)
 debug: all

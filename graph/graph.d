@@ -84,7 +84,3 @@ unittest {
 	assert(graph.degree(1) == 1);
 	assert(graph.degree(2) == 2);
 }
-
-//void main() {
-
-//}
