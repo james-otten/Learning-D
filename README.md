@@ -10,7 +10,7 @@ Code written while learning D.
 * binaryTrees.d - Fun with binary trees and class templates.
 * graph/graph.d - Graph library which is a class template.
 * graph/deque.d - Simple deque using a dynamic array.
-* graph/breadthFirstSearch.d - Breadth First Search for my graph type (graph/graph.d).
+* graph/breadthFirstSearch.d - Breadth First Search for my graph type (graph/graph.d) [Wikipedia](https://en.wikipedia.org/wiki/Breadth_first_search)
 * graph/graphTest.d - Small test program that uses graph.d, deque.d, breadthFirstSearch.d.
 
 ####Building:
