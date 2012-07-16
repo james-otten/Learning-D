@@ -12,6 +12,7 @@ Code written while learning D.
 * graph/deque.d - Simple deque using a dynamic array.
 * graph/breadthFirstSearch.d - Breadth First Search for my graph type (graph/graph.d) [Wikipedia](https://en.wikipedia.org/wiki/Breadth_first_search)
 * graph/graphTest.d - Small test program that uses graph.d, deque.d, breadthFirstSearch.d.
+* permutation.d - Iteratively generates permutations of a given array like C++'s STL next_permutation().
 
 ####Building:
 Debug: `make debug`
