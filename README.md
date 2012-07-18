@@ -14,6 +14,7 @@ Code written while learning D.
 * graph/graphTest.d - Small test program that uses graph.d, deque.d, breadthFirstSearch.d.
 * permutation.d - Iteratively generates permutations of a given array like C++'s STL next_permutation().
 * morseCode.d - Translates console input to Morse code.
+* sumOfPrimes.d - Calculates the sum of primes below a given number, uses the sieve of Eratosthenes.
 
 ####Building:
 Debug: `make debug`
