@@ -15,6 +15,7 @@ Code written while learning D.
 * permutation.d - Iteratively generates permutations of a given array like C++'s STL next_permutation().
 * morseCode.d - Translates console input to Morse code.
 * sumOfPrimes.d - Calculates the sum of primes below a given number, uses the sieve of Eratosthenes.
+* pythagoreanTriplet.d - Finds Pythagorean triplets with a user defined sum.
 
 ####Building:
 Debug: `make debug`
