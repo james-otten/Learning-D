@@ -37,8 +37,12 @@ bool next_permutation(T)(ref T[] seq, ulong first, ulong last) {
 }
 
 void main() {
-	int[] list = [1, 2, 3];
+	int[] list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+	int i;
 	do {
-		writeln(list);
+		if(++i == 1_000_000) {
+			writeln(list);
+			break;
+		}
 	} while(next_permutation!(int)(list, 0, list.length));
 }
