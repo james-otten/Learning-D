@@ -17,6 +17,7 @@ Code written while learning D.
 * sumOfPrimes.d - Calculates the sum of primes below a given number, uses the sieve of Eratosthenes.
 * pythagoreanTriplet.d - Finds Pythagorean triplets with a user defined sum.
 * greatestProduct.d - Find the greatest product of N consecutive digits of the user's number.
+* comments.d - Removes C style comments from stdin.
 
 ####Building:
 Debug: `make debug`
