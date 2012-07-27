@@ -21,7 +21,7 @@ Code written while learning D.
 * comments.d - Removes C style comments from stdin.
 * weighted graph/
     - dijkstra.d - Dijkstra's algorithm with my weighted graph type (weighted graph/weightedGraph.d) [Wikipedia](https://en.wikipedia.org/wiki/Dijkstra's_algorithm)
-    - weightedGraph.d - Undirected, adjacency list, weighted graph class template.
+    - weightedGraph.d - Undirected or directed, adjacency list, weighted graph class template.
     - weightedGraphTest.d - Small test program that uses dijkstra.d and weightedGraph.d
 
 ####Building:

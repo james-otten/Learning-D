@@ -1,5 +1,5 @@
 /*
- * Adjacency list, undirected, weighted graph as class template.
+ * Adjacency list, directed _or_ undirected, weighted graph as class template.
  * Copyright 2012 James Otten <james_otten@lavabit.com>
 */
 
@@ -10,8 +10,10 @@ import std.algorithm;
 
 class WeightedGraph(T) {
 	private ulong[T] [T] SymbolTable; //Maps T -> (Map of T -> ulong)
+	private bool directed;
 
-	this() {}
+	this() {} //directed = false
+	this(bool isDirectedGraph) { directed = isDirectedGraph; }
 
 	//Adds vertex k
 	void addVertex(T k) {
@@ -28,9 +30,11 @@ class WeightedGraph(T) {
 		adj[b] = weight;
 		SymbolTable[a] = adj;
 
-		adj = SymbolTable[b];
-		adj[a] = weight;
-		SymbolTable[b] = adj;
+		if(!directed) {
+			adj = SymbolTable[b];
+			adj[a] = weight;
+			SymbolTable[b] = adj;
+		}
 	}
 	//Returns associative array of vertices adjacent to k (T -> weight)
 	ulong[T] adjacentTo(T k) {
@@ -79,7 +83,7 @@ class WeightedGraph(T) {
 }
 
 unittest {
-	auto graph = new WeightedGraph!int;
+	auto graph = new WeightedGraph!int(false);
 	//Test addEdge()
 	graph.addEdge(1, 2, 5);
 	graph.addEdge(1, 3, 2);

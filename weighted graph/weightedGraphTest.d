@@ -8,7 +8,7 @@ import weightedGraph;
 import dijkstra;
 
 void main() {
-	auto graph = new WeightedGraph!int;
+	auto graph = new WeightedGraph!int(false);
 
 	//https://upload.wikimedia.org/wikipedia/commons/4/45/Dijksta_Anim.gif
 	graph.addEdge(1, 2, 7);
