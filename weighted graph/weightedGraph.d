@@ -16,12 +16,12 @@ class WeightedGraph(T) {
 	this(bool isDirectedGraph) { directed = isDirectedGraph; }
 
 	//Adds vertex k
-	void addVertex(T k) {
+	void addVertex(in T k) {
 		ulong[T] adj;
 		SymbolTable[k] = adj;
 	}
 	//Adds edge from a to b
-	void addEdge(T a, T b, ulong weight) {
+	void addEdge(in T a, T b, in ulong weight) {
 		if(!exists(a))
 			addVertex(a);
 		if(!exists(b))
@@ -37,7 +37,7 @@ class WeightedGraph(T) {
 		}
 	}
 	//Returns associative array of vertices adjacent to k (T -> weight)
-	ulong[T] adjacentTo(T k) {
+	ulong[T] adjacentTo(in T k) {
 		if(k in SymbolTable)
 			return SymbolTable[k];
 		else {
@@ -46,11 +46,11 @@ class WeightedGraph(T) {
 		}
 	}
 	//Returns number of vertices in graph
-	ulong numberVertices() {
+	ulong numberVertices() const {
 		return SymbolTable.length;
 	}
 	//Returns number of edges in graph
-	ulong numberEdges() {
+	ulong numberEdges() const {
 		ulong count;
 		foreach(k; SymbolTable.byKey) {
 			count += SymbolTable[k].length;
@@ -58,25 +58,25 @@ class WeightedGraph(T) {
 		return count / 2;
 	}
 	//Returns true if vertex is in graph
-	bool exists(T vertex) {
+	bool exists(in T vertex) const {
 		if (vertex in SymbolTable) //Not sure how to do this in one line :/
 			return true;
 		return false;
 	}
 	//Returns true if there is an edge from v to w
-	bool exists(T a, T b) {
+	bool exists(in T a, in T b) const {
 		return exists(a) && ! find(SymbolTable[a].byKey(), b).empty;
 	}
 	//Returns the degree of given vertex (number of incident edges)
-	ulong degree(T v) {
+	ulong degree(in T v) {
 		return exists(v) ? adjacentTo(v).length : 0;
 	}
 	//Returns an array of all vertices
-	T[] getAllVertices() {
+	T[] getAllVertices() const {
 		return SymbolTable.keys;
 	}
 	//Returns weight of edge between a and b
-	ulong weightBetween(T a, T b) {
+	ulong weightBetween(in T a, in T b) const {
 		assert(exists(a, b));
 		return SymbolTable[a][b];
 	}
