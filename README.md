@@ -23,6 +23,7 @@ Code written while learning D.
     - dijkstra.d - Dijkstra's algorithm with my weighted graph type (weighted graph/weightedGraph.d) [Wikipedia](https://en.wikipedia.org/wiki/Dijkstra's_algorithm)
     - weightedGraph.d - Undirected or directed, adjacency list, weighted graph class template.
     - weightedGraphTest.d - Small test program that uses dijkstra.d and weightedGraph.d
+* redBlackTree.d - Red black tree class template.
 
 ####Building:
 Debug: `make debug`
