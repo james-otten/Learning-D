@@ -236,13 +236,25 @@ class RedBlackTree(K, V) {
 	void remove(in K key) {
 		auto node = search(key);
 		if(node !is null) {
-			auto child = (node.right is null) ? node.left : node.right;
-			replaceNode(child, node);
-			if(node.color == rbColor.BLACK) {
-				if(child.color == rbColor.RED)
-					child.color = rbColor.BLACK;
-				else removeCase1(child);
+			if(node.left !is null && node.right !is null) {
+				assert(false, "Not implemented yet.");
 			}
+			//0-1 null children
+			auto child = (node.right is null) ? node.left : node.right;
+			if(child !is null) { //1 null child
+				replaceNode(child, node);
+				if(node.color == rbColor.BLACK) {
+					if(child.color == rbColor.RED)
+						child.color = rbColor.BLACK;
+					else removeCase1(child);
+				}
+			}
+			else { //0 null children
+				if(node.parent.right == node)
+					node.parent.right = null;
+				else node.parent.left = null;
+			}
+			verifyTree();
 		}
 	}
 
@@ -406,10 +418,9 @@ void main() {
 	}
 	writeln("max depth: ", rbtree.maxDepth());
 	writeln(rbtree.keys().length);
-	//writeln(rbtree.values());
 	/*for(int i = 0; i < numElements; i++) {
 		int k = i;//uniform(0, max);
-		rbtree.remove(k);
-	}
-	writeln(rbtree.keys().length);*/
+		///rbtree.remove(k);
+	}*/
+	writeln(rbtree.keys().length);
 }
