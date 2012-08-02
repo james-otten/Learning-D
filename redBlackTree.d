@@ -321,9 +321,8 @@ class RedBlackTree(K, V) {
 	}
 
 	//Returns the lagest depth of a node from the root node
-	//TODO: const
-	int maxDepth() {
-		int _maxDepth(RedBlackTreeNode!(K, V) croot, int depth) {
+	int maxDepth() const {
+		int _maxDepth(const RedBlackTreeNode!(K, V) croot, int depth) {
 			if(croot is null)
 				return 0;
 			else {
@@ -336,9 +335,8 @@ class RedBlackTree(K, V) {
 	}
 
 	//Returns a (sorted) array of the tree's element's keys
-	//TODO: const
-	K[] keys() {
-		K[] _toArray(RedBlackTreeNode!(K, V) croot) {
+	K[] keys() const {
+		K[] _toArray(const RedBlackTreeNode!(K, V) croot) {
 			K[] ret = [];
 			if(croot is null)
 				return [];
@@ -353,9 +351,8 @@ class RedBlackTree(K, V) {
 	}
 
 	//Returns a (sorted) array of the tree's element's values
-	//TODO: const
-	V[] values() {
-		V[] _toArray(RedBlackTreeNode!(K, V) croot) {
+	V[] values() const {
+		V[] _toArray(const RedBlackTreeNode!(K, V) croot) {
 			V[] ret = [];
 			if(croot is null)
 				return [];
@@ -407,7 +404,6 @@ void main() {
 		assert(n !is null, "New key not found.");
 		assert(n.value == v, "Key is pointing to the wrong value.");
 	}
-	writeln("start" ~ rbtree.toString() ~ "\n\n");
 	writeln("max depth: ", rbtree.maxDepth());
 	writeln(rbtree.keys().length);
 	//writeln(rbtree.values());
