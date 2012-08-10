@@ -27,6 +27,7 @@ Code written while learning D.
 * trianglePath.d - Finds the maximum sum of adjacent numbers from the top to bottom of a given tree (euler 18 and 67). 
     - Usage: ./bin/trianglePath < triangle.txt
 * pascalsTriangle.d - Pascal's triangle and euler 15
+* divisableByRange - Effiecently finds the first number evenly divisable by every number from 1 to n (euler 5).
 
 ####Building:
 Debug: `make debug`
