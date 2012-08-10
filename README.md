@@ -24,6 +24,7 @@ Code written while learning D.
     - weightedGraph.d - Undirected or directed, adjacency list, weighted graph class template.
     - weightedGraphTest.d - Small test program that uses dijkstra.d and weightedGraph.d
 * redBlackTree.d - Red black tree class template.
+* trianglePath.d - Finds the maximum sum of adjacent numbers from the top to bottom of a given tree (euler 18 and 67). Usage: ./bin/trianglePath < triangle.txt
 
 ####Building:
 Debug: `make debug`
