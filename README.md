@@ -26,9 +26,11 @@ Code written while learning D.
 * redBlackTree.d - Red black tree class template.
 * trianglePath.d - Finds the maximum sum of adjacent numbers from the top to bottom of a given tree (Euler 18 and 67). 
     - Usage: ./bin/trianglePath < triangle.txt
-* pascalsTriangle.d - Pascal's triangle and Euler 15
+* pascalsTriangle.d - Pascal's triangle and Euler 15.
 * divisableByRange.d - Effiecently finds the first number evenly divisable by every number from 1 to n (Euler 5).
-* sunday.d - Number of times it was a Sunday on the first of the month in the 20th century (Euler 19)
+* sunday.d - Number of times it was a Sunday on the first of the month in the 20th century (Euler 19).
+* digitsOfSum.d - Finds the first 10 digits of the sum of 100, 50 digit numbers (Euler 13).
+    - Usage: ./bin/digitsOfSum < numbers.txt
 
 ####Building:
 Debug: `make debug`
