@@ -32,7 +32,7 @@ Code written while learning D.
 * digitsOfSum.d - Finds the first 10 digits of the sum of 100, 50 digit numbers (Euler 13).
     - Usage: ./bin/digitsOfSum < numbers.txt
 * spiralDiagonals.d - What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way? (Euler 28)
-* pentagonalNumbers.d - Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference is pentagonal and D = |Pk - Pj| is minimised (Euler 44)
+* pentagonalNumbers.d - Find the pair of pentagonal numbers for which their sum and difference is pentagonal (Euler 44)
 
 ####Building:
 Debug: `make debug`
