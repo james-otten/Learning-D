@@ -24,10 +24,11 @@ Code written while learning D.
     - weightedGraph.d - Undirected or directed, adjacency list, weighted graph class template.
     - weightedGraphTest.d - Small test program that uses dijkstra.d and weightedGraph.d
 * redBlackTree.d - Red black tree class template.
-* trianglePath.d - Finds the maximum sum of adjacent numbers from the top to bottom of a given tree (euler 18 and 67). 
+* trianglePath.d - Finds the maximum sum of adjacent numbers from the top to bottom of a given tree (Euler 18 and 67). 
     - Usage: ./bin/trianglePath < triangle.txt
-* pascalsTriangle.d - Pascal's triangle and euler 15
-* divisableByRange.d - Effiecently finds the first number evenly divisable by every number from 1 to n (euler 5).
+* pascalsTriangle.d - Pascal's triangle and Euler 15
+* divisableByRange.d - Effiecently finds the first number evenly divisable by every number from 1 to n (Euler 5).
+* sunday.d - Number of times it was a Sunday on the first of the month in the 20th century (Euler 19)
 
 ####Building:
 Debug: `make debug`
