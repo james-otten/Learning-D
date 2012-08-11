@@ -13,7 +13,7 @@ Code written while learning D.
     - deque.d - Simple deque using a dynamic array.
     - breadthFirstSearch.d - Breadth First Search for my graph type (graph/graph.d) [Wikipedia](https://en.wikipedia.org/wiki/Breadth_first_search)
     - graphTest.d - Small test program that uses graph.d, deque.d, breadthFirstSearch.d.
-* permutation.d - Iteratively generates permutations of a given array like C++'s STL next_permutation().
+* permutation.d - Iteratively generates permutations of a given array like C++'s STL next_permutation() (Euler 24 and 43)
 * morseCode.d - Translates console input to Morse code.
 * sumOfPrimes.d - Calculates the sum of primes below a given number, uses the sieve of Eratosthenes.
 * pythagoreanTriplet.d - Finds Pythagorean triplets with a user defined sum.
