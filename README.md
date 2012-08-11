@@ -23,6 +23,7 @@ Code written while learning D.
     - dijkstra.d - Dijkstra's algorithm with my weighted graph type (weighted graph/weightedGraph.d) [Wikipedia](https://en.wikipedia.org/wiki/Dijkstra's_algorithm)
     - weightedGraph.d - Undirected or directed, adjacency list, weighted graph class template.
     - weightedGraphTest.d - Small test program that uses dijkstra.d and weightedGraph.d
+    - minimumPathSum.d - Find the minimum path sum of a 2D matrix by moving down and right (Euler 81)
 * redBlackTree.d - Red black tree class template.
 * trianglePath.d - Finds the maximum sum of adjacent numbers from the top to bottom of a given tree (Euler 18 and 67). 
     - Usage: ./bin/trianglePath < files/triangle.txt

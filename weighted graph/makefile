@@ -7,13 +7,20 @@ GDB = -unittest -debug -gc -w -wi
 
 LIBOBJS = weightedGraph.o dijkstra.o
 LIBSRC = weightedGraph.d dijkstra.d
-TARGET = weightedGraphTest
-SOURCE = weightedGraphTest.d
 
-all: $(LIBOBJS) $(TARGET)
+TEST_TARGET = weightedGraphTest
+TEST_SOURCE = weightedGraphTest.d
 
-$(TARGET): $(OBJS)
-	$(DC) $^ $(LIBOBJS) $(SOURCE) -of$@
+MPS_TARGET = minimumPathSum
+MPS_SOURCE = minimumPathSum.d
+
+all: $(LIBOBJS) $(TEST_TARGET) $(MPS_TARGET)
+
+$(TEST_TARGET): $(OBJS)
+	$(DC) $^ $(LIBOBJS) $(TEST_SOURCE) -of$@
+
+$(MPS_TARGET): $(OBJS)
+	$(DC) $^ $(LIBOBJS) $(MPS_SOURCE) -of$@
 
 $(LIBOBJS): $(LIBSRC)
 	$(DC) $^ $(DFLAGS) -c
@@ -24,4 +31,6 @@ debug: all
 
 clean:
 	rm -f *.o
-	rm -f $(TARGET)
+	rm -f $(TEST_TARGET)
+	rm -f $(MPS_TARGET)
+
