@@ -36,6 +36,6 @@ Code written while learning D.
 * pentagonalNumbers.d - Find the pair of pentagonal numbers for which their sum and difference is pentagonal (Euler 44)
 
 ####Building:
-Debug: `make debug`
+Debug: `make`
     
-Release: `make`
+Release: `make release`

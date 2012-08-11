@@ -2,8 +2,8 @@
 # Copyright 2012 James Otten <james_otten@lavabit.com>
 
 DC = dmd
-DFLAGS = -inline -O -release
-GDB = -unittest -debug -gc -w -wi
+DFLAGS = -unittest -debug -gc -w -wi
+RFLAGS = -inline -O -release
 
 LIBOBJS = weightedGraph.o dijkstra.o
 LIBSRC = weightedGraph.d dijkstra.d
@@ -17,16 +17,16 @@ MPS_SOURCE = minimumPathSum.d
 all: $(LIBOBJS) $(TEST_TARGET) $(MPS_TARGET)
 
 $(TEST_TARGET): $(OBJS) $(TEST_SOURCE)
-	$(DC) $^ $(LIBOBJS) $(TEST_SOURCE) -of$@
+	$(DC) $^ $(LIBOBJS) -of$@
 
 $(MPS_TARGET): $(OBJS) $(MPS_SOURCE)
-	$(DC) $^ $(LIBOBJS) $(MPS_SOURCE) -of$@
+	$(DC) $^ $(LIBOBJS) -of$@
 
 $(LIBOBJS): $(LIBSRC)
 	$(DC) $^ $(DFLAGS) -c
 
-debug: DFLAGS = $(GDB)
-debug: all
+release: DFLAGS = $(RFLAGS)
+release: all
 
 
 clean:

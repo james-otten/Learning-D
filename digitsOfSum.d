@@ -27,7 +27,7 @@ BigInt sum(BigInt[] array) {
 }
 
 unittest {
-	assert(sum(["1", "2", "3"]) == 6);
+	assert(sum([BigInt("1"), BigInt("2"), BigInt("3")]) == 6);
 }
 
 void main() {

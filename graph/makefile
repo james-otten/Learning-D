@@ -2,8 +2,8 @@
 # Copyright 2012 James Otten <james_otten@lavabit.com>
 
 DC = dmd
-DFLAGS = -inline -O -release
-GDB = -unittest -debug -gc -w -wi
+DFLAGS = -unittest -debug -gc -w -wi
+RFLAGS = -inline -O -release
 
 LIBOBJS = graph.o deque.o breadthFirstSearch.o
 LIBSRC = graph.d deque.d breadthFirstSearch.d
@@ -18,8 +18,8 @@ $(TARGET): $(OBJS)
 $(LIBOBJS): $(LIBSRC)
 	$(DC) $^ $(DFLAGS) -c
 
-debug: DFLAGS = $(GDB)
-debug: all
+release: DFLAGS = $(RFLAGS)
+release: all
 
 
 clean:
