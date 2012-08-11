@@ -16,10 +16,10 @@ MPS_SOURCE = minimumPathSum.d
 
 all: $(LIBOBJS) $(TEST_TARGET) $(MPS_TARGET)
 
-$(TEST_TARGET): $(OBJS)
+$(TEST_TARGET): $(OBJS) $(TEST_SOURCE)
 	$(DC) $^ $(LIBOBJS) $(TEST_SOURCE) -of$@
 
-$(MPS_TARGET): $(OBJS)
+$(MPS_TARGET): $(OBJS) $(MPS_SOURCE)
 	$(DC) $^ $(LIBOBJS) $(MPS_SOURCE) -of$@
 
 $(LIBOBJS): $(LIBSRC)

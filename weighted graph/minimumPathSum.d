@@ -1,5 +1,9 @@
 /*
- * Find the minimum path sum of a 2D matrix by moving down and right (Euler 81)
+ * Find the minimum path sum of a 2D matrix by moving right and down from NW to SE (Euler 81)
+ * 
+ * Find the minimum path sum of a 2D matrix from the left column to the right column (Euler 82)
+ *
+ * Find the minimum path sum of a 2D matrix by moving left, right, up, and down from NW to SE (Euler 83)
  *
  * Instead of recursing on an array working backwards like I did in 67,
  * I'll be using a directed weighted graph and dijkstra's algorithm.
@@ -15,27 +19,74 @@ import std.string;
 import weightedGraph;
 import dijkstra;
 
-//Template for this problem (some sizes call for ints, others for ulongs)
-T findMinimumPathSum(T)(ref T[][] matrix) {
-	//Helper: Converts array coordinates to number going right to left
-	T nodeNumber(T i, T j, ulong len) {
-		return (i * cast(T)len) + j;
-	}
+//Template for 81
+T findMinimumPathSumRightDown(T)(ref T[][] matrix) {
 	//Build the graph
 	auto graph = new WeightedGraph!T(true); //Directed because we can only move certain ways
-	for(int i = 0; i < matrix.length; i++) {
-		for(int j = 0; j < matrix[i].length; j++) {
-			if(j + 1 < matrix[i].length)
-				graph.addEdge(nodeNumber(i, j, matrix[i].length), nodeNumber(i, j + 1, matrix[i].length), matrix[i][j + 1]); //To the right
-			if(i + 1 < matrix.length)
-				graph.addEdge(nodeNumber(i, j, matrix[i].length), nodeNumber(i + 1, j, matrix[i].length), matrix[i + 1][j]); //Down
-		}
-	}
+	//Make numbers for the virtual nodes
+	immutable T start = nodeNumber!T(0, 0, matrix.length);
+	immutable T end = nodeNumber!T(matrix.length - 1, matrix.length - 1, matrix.length);
+	//Fill in the rest of the nodes
+	addNodes!T(graph, matrix, false, true, true, false);
 	//Do dijkstra
-	//Second arg will always be 0 but call is for consistency (could break if someone changes numbering scheme)
-	auto dijkstra = new Dijkstra!T(graph, nodeNumber(0, 0, 0));
-	return matrix[0][0] + cast(T)dijkstra.distanceTo(nodeNumber(matrix.length - 1, matrix[0].length - 1, matrix.length)); //We never added the first node
+	auto dijkstra = new Dijkstra!T(graph, start);
+	return cast(typeof(return))dijkstra.distanceTo(end) + matrix[0][0]; //We never added the first node
 }
+
+//Template for 82
+T findMinimumPathSumLeftRight(T)(ref T[][] matrix) {
+	//Build the graph
+	auto graph = new WeightedGraph!T(true); //Directed because we can only move certain ways
+	//Make numbers for the virtual nodes
+	immutable T start = cast(T)(matrix.length ^^ 2 + 1);
+	immutable T end = cast(T)(matrix.length ^^ 2 + 2);
+	//Fill in the virtual nodes
+	for(int i = 0; i < matrix.length; i++) {
+		graph.addEdge(start, nodeNumber!T(i, 0, matrix.length), matrix[i][0]);// virtual start -> each left
+		graph.addEdge(nodeNumber!T(i, matrix.length - 1, matrix.length), end, 0);// each right -> virtual end
+	}
+	//Fill in the rest of the nodes
+	addNodes!T(graph, matrix, true, true, true, false);
+	//Do dijkstra
+	auto dijkstra = new Dijkstra!T(graph, start);
+	return cast(typeof(return))dijkstra.distanceTo(end);
+}
+
+//Template for 83
+T findMinimumPathSumAll(T)(ref T[][] matrix) {
+	//Build the graph
+	auto graph = new WeightedGraph!T(true); //Directed because we can only move certain ways
+	//Make numbers for the virtual nodes
+	immutable T start = nodeNumber!T(0, 0, matrix.length);
+	immutable T end = nodeNumber!T(matrix.length - 1, matrix.length - 1, matrix.length);
+	//Fill in the rest of the nodes
+	addNodes!T(graph, matrix, true, true, true, true);
+	//Do dijkstra
+	auto dijkstra = new Dijkstra!T(graph, start);
+	return cast(typeof(return))dijkstra.distanceTo(end) + matrix[0][0]; //We never added the first node
+}
+
+
+//Helper: Converts array coordinates to number going right to left
+T nodeNumber(T)(T i, T j, ulong len) {
+	return cast(T)((i * len) + j);
+}
+	
+//Helper: Adds nodes to graph
+void addNodes(T)(WeightedGraph!T graph, ref T[][] matrix, bool up, bool down, bool right, bool left) {
+	for(int i = 0; i < matrix.length; i++)
+		for(int j = 0; j < matrix[i].length; j++) {
+			if(left && j - 1 >= 0)
+				graph.addEdge(nodeNumber(i, j, matrix[i].length), nodeNumber(i, j - 1, matrix[i].length), matrix[i][j - 1]); //Left
+			if(right && j + 1 < matrix[i].length)
+				graph.addEdge(nodeNumber(i, j, matrix[i].length), nodeNumber(i, j + 1, matrix[i].length), matrix[i][j + 1]); //Right
+			if(down && i + 1 < matrix.length)
+				graph.addEdge(nodeNumber(i, j, matrix[i].length), nodeNumber(i + 1, j, matrix[i].length), matrix[i + 1][j]); //Down
+			if(up && i - 1 >= 0)
+				graph.addEdge(nodeNumber(i, j, matrix[i].length), nodeNumber(i - 1, j, matrix[i].length), matrix[i - 1][j]); //Up
+		}
+}
+
 
 /* Parse matrix from stdin
  * Format: commas separating items, newlines separating rows:
@@ -54,16 +105,20 @@ void parseMatrix(T)(ref T[][] ret) {
 }
 
 unittest {
-	int[][] matrix = 	[[131, 673, 234, 103, 18],
+	ulong[][] matrix = 	[[131, 673, 234, 103, 18],
 				[201, 96, 342, 965, 150],
 				[630, 803, 746, 422, 111],
 				[537, 699, 497, 121, 956],
 				[805, 732, 524, 37, 331]];
-	assert(findMinimumPathSum!int(matrix) == 2427, "findMinimumPathSum() failed euler example.");
+	assert(findMinimumPathSumRightDown!ulong(matrix) == 2427, "findMinimumPathSum() failed euler example.");
+	assert(findMinimumPathSumLeftRight!ulong(matrix) == 994, "findMinimumPathSumLeftRight() failed euler example.");
+	assert(findMinimumPathSumAll!ulong(matrix) == 2297, "findMinimumPathSumAll() failed euler example.");
 }
 
 void main() {
 	ulong[][] matrix;
 	parseMatrix!ulong(matrix);
-	writeln("81: ", findMinimumPathSum!ulong(matrix));
+	writeln("81: ", findMinimumPathSumRightDown!ulong(matrix));
+	writeln("82: ", findMinimumPathSumLeftRight!ulong(matrix));
+	writeln("83: ", findMinimumPathSumAll!ulong(matrix));
 }
