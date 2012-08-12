@@ -34,6 +34,7 @@ Code written while learning D.
     - Usage: ./bin/digitsOfSum < files/numbers.txt
 * spiralDiagonals.d - What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way? (Euler 28)
 * pentagonalNumbers.d - Find the pair of pentagonal numbers for which their sum and difference is pentagonal (Euler 44)
+* sequence.d - Find the largest chain in a sequence starting from < 1000000 (Euler 14)
 
 ####Building:
 Debug: `make`
