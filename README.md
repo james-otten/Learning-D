@@ -37,6 +37,7 @@ Code written while learning D.
 * sequence.d - Find the largest chain in a sequence starting from < 1000000 (Euler 14)
 * squareOfDigits.d - Investagate the sum of squares of digits chain (Euler 92)
 * integerCombinations.d - Find the number of unique values in the set a^b for a and b from 2 to 100 (Euler 29)
+* greatestProductMatrix.d - What is the greatest product of four adjacent numbers in any direction (up, down, left, right, or diagonally) in the 20x20 grid? (Euler 11)
 
 ####Building:
 Debug: `make`
