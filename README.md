@@ -36,6 +36,7 @@ Code written while learning D.
 * pentagonalNumbers.d - Find the pair of pentagonal numbers for which their sum and difference is pentagonal (Euler 44)
 * sequence.d - Find the largest chain in a sequence starting from < 1000000 (Euler 14)
 * squareOfDigits.d - Investagate the sum of squares of digits chain (Euler 92)
+* integerCombinations.d - Find the number of unique values in the set a^b for a and b from 2 to 100 (Euler 29)
 
 ####Building:
 Debug: `make`
