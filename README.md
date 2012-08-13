@@ -39,6 +39,7 @@ Code written while learning D.
 * integerCombinations.d - Find the number of unique values in the set a^b for a and b from 2 to 100 (Euler 29)
 * greatestProductMatrix.d - What is the greatest product of four adjacent numbers in any direction (up, down, left, right, or diagonally) in the 20x20 grid? (Euler 11)
 * plaindrome.d - Find the largest plaindrome made from the product of two 3 digit numbers (Euler 4)
+* fifthPowerOfDigits.d - Find the sum of all the numbers that can be written as the sum of fifth powers of their digits (Euler 30)
 
 ####Building:
 Debug: `make`
