@@ -41,6 +41,7 @@ Code written while learning D.
 * plaindrome.d - Find the largest plaindrome made from the product of two 3 digit numbers (Euler 4)
 * fifthPowerOfDigits.d - Find the sum of all the numbers that can be written as the sum of fifth powers of their digits (Euler 30)
 * triangleNumbers.d - What is the value of the first triangle number to have over five hundred divisors? (Euler 12)
+* sumDivisors.d - Evaluate the sum of all the amicable numbers under 10000. (Euler 21) (Euler 23) isn't working right now.
 
 ####Building:
 Debug: `make`
