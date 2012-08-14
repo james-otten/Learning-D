@@ -40,6 +40,7 @@ Code written while learning D.
 * greatestProductMatrix.d - What is the greatest product of four adjacent numbers in any direction (up, down, left, right, or diagonally) in the 20x20 grid? (Euler 11)
 * plaindrome.d - Find the largest plaindrome made from the product of two 3 digit numbers (Euler 4)
 * fifthPowerOfDigits.d - Find the sum of all the numbers that can be written as the sum of fifth powers of their digits (Euler 30)
+* triangleNumbers.d - What is the value of the first triangle number to have over five hundred divisors? (Euler 12)
 
 ####Building:
 Debug: `make`
