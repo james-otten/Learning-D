@@ -58,6 +58,7 @@ unittest {
 	//Test sumDivisors()
 	assert(sumDivisors(220) == 284, "sumDivisors() failed euler example");
 	assert(sumDivisors(284) == 220, "sumDivisors() failed euler example");
+	assert(sumDivisors(28) == 28, "sumDivisors() failed euler example");
 	//Test areAmicable()
 	ulong[ulong] dict;
 	assert(areAmicable(220, 284, dict), "areAmicable() failed euler example");
@@ -68,14 +69,14 @@ unittest {
 }
 
 void main() {
-	//writeln("21: ", sumAmicableNumbersUnder(10_000));
-	//TODO: This isn't working
+	writeln("21: ", sumAmicableNumbersUnder(10_000));
+	/*//TODO: This isn't working
 	immutable ulong MAX = 28123; //Using "By mathematical analysis, it can be shown that all integers greater than 28123 can be written as the sum of two abundant numbers."
 	ulong sum;
 	ulong[] abundantNumbers;
 	ulong[MAX] nums;
 	//bool[MAX] numbers;
-	for(int i = 0; i <= MAX; i++)
+	for(int i = 0; i < MAX; i++)
 		nums[i] = i + 1;
 	for(int i = 12; i < MAX; i++)
 		if(isAbundant(i))
@@ -99,5 +100,5 @@ void main() {
 		//	sum += i + 1;
 			//writeln(i + 1);
 	//}
-	writeln("23: ", sum);writeln(nums[24]);
+	writeln("23: ", sum);writeln(nums[24]);*/
 }
