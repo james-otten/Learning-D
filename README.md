@@ -42,7 +42,7 @@ Code written while learning D.
 * fifthPowerOfDigits.d - Find the sum of all the numbers that can be written as the sum of fifth powers of their digits (Euler 30)
 * triangleNumbers.d - What is the value of the first triangle number to have over five hundred divisors? (Euler 12)
 * sumDivisors.d - Evaluate the sum of all the amicable numbers under 10000. (Euler 21)
-* sorting.d - Compare the time it takes various sortings algorithms to sort the same random array.
+* sorting.d - Compare the time it takes various sortings algorithms to sort the same random, sorted, inverse sorted and partially sorted arrays.
 
 ####Building:
 Debug: `make`
