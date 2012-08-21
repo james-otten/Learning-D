@@ -28,7 +28,7 @@ ulong maxValue(T)(ref T[] arr) {
 bool isSorted(T)(ref T[] arr) {
 	ulong i = 1;
 	while(i < arr.length)
-		if(arr[i] < arr[i++ - 1]) //If this one is smaller than the last
+		if(arr[i] <= arr[i++ - 1]) //If this one is smaller than the last
 			return false;
 	return true;
 }
@@ -169,8 +169,9 @@ void quicksort(T)(ref T[] arr) {
 			ulong pivot = left + (right - left) / 2;
 			pivot = partition(arr, left, right, pivot);
 			if(pivot != 0) {
-			quick(arr, left, pivot - 1);
-			quick(arr, pivot + 1, right);}
+				quick(arr, left, pivot - 1);
+				quick(arr, pivot + 1, right);
+			}
 		}
 	}
 	quick(arr, 0UL, arr.length - 1);
@@ -199,25 +200,62 @@ unittest {
 	assert(isSorted(answer), "isSorted() failed");
 }
 
+//Helper for main, tests a sorting function and prints results
+void doSortingTest(T)(ref T[] arr, void function(ref T[]) func, string name) {
+	auto start = Clock.currTime();
+	func(arr);
+	auto end = Clock.currTime();
+	if(isSorted!T(arr))
+		writeln(name, ":\t\t", to!string(end - start));
+	else writeln("Failed ", name, ":\t\t", to!string(end - start), " ", to!string(arr));
+}
+
 void main() {
 	auto funcs = [&insertionSort!int, &bubbleSort!int, &selectionSort!int, &shellsort!int, &radixSort!int, &mergeSort!int, &quicksort!int];
 	auto names = ["Insertion Sort", "Bubble Sort", "Selection Sort", "Shellsort", "Radix Sort", "Merge Sort", "Quicksort"];
-	int[] data;
+	int[] random, sorted, inverseSorted, partiallySorted;
 	ulong values;
 
-	writeln("Enter the number of random values to sort:");
+	writeln("Enter the number of values to sort:");
 	readf("%d", &values);
 
+	//Random numbers
 	for(ulong i = 0; i < values; i++)
-		data ~= uniform(0, int.max);
+		random ~= uniform(0, int.max);
 
+	writeln("\nRandom numbers:");
 	foreach(i, f; funcs) {
-		auto temp = data.dup;
-		auto start = Clock.currTime();
-		f(temp);
-		auto end = Clock.currTime();
-		if(isSorted(temp))
-			writeln(names[i] ~ ":\t\t" ~ to!string(end - start));
-		else writeln("Failed " ~ names[i] ~ ":\t\t" ~ to!string(end - start));
+		auto temp = random.dup;
+		doSortingTest!int(temp, f, names[i]);
+	}
+
+	//Sorted numbers
+	for(int i = 0; i < values; i++)
+		sorted ~= i;
+
+	writeln("\nSorted numbers");
+	foreach(i, f; funcs) {
+		auto temp = sorted.dup;
+		doSortingTest!int(temp, f, names[i]);
+	}
+
+	//Inverse sorted numbers (backwards)
+	inverseSorted = sorted.reverse;
+
+	writeln("\nInverse sorted numbers");
+	foreach(i, f; funcs) {
+		auto temp = inverseSorted.dup;
+		doSortingTest!int(temp, f, names[i]);
+	}
+
+	//Partially sorted
+	partiallySorted = sorted.dup;
+	for(int i = 0; i < values * .1; i++) //_About_ 10%
+		swap!int(partiallySorted, uniform(0, values), uniform(0, values));
+
+	writeln("\nPartially sorted numbers");
+	foreach(i, f; funcs) {
+		auto temp = partiallySorted.dup;
+		doSortingTest!int(temp, f, names[i]);
 	}
 }
