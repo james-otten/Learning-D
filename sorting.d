@@ -9,15 +9,15 @@ import std.random;
 import std.datetime;
 
 //Swap index i and j in arr
-void swap(ref ulong[] arr, ulong i, ulong j) {
-	ulong temp = arr[i];
+void swap(T)(ref T[] arr, ulong i, ulong j) {
+	T temp = arr[i];
 	arr[i] = arr[j];
 	arr[j] = temp;
 }
 
 //Return the largest value from arr
-ulong maxValue(ref ulong[] arr) {
-	ulong max;
+ulong maxValue(T)(ref T[] arr) {
+	T max;
 	foreach(ul; arr)
 		if(ul > max)
 			max = ul;
@@ -30,10 +30,10 @@ ulong maxValue(ref ulong[] arr) {
  * Best: O(n)
  * Average: O(n^2)
  */
-void insertionSort(ref ulong[] arr) {
+void insertionSort(T)(ref T[] arr) {
 	for(ulong i = 1; i < arr.length; i++)
 		for(ulong j = i; j > 0 && arr[j - 1] > arr[j]; j--)
-			swap(arr, j, j - 1);
+			swap!T(arr, j, j - 1);
 }
 
 /*
@@ -42,11 +42,11 @@ void insertionSort(ref ulong[] arr) {
  * Best: O(n^2)
  * Average: O(n^2)
  */
-void bubbleSort(ref ulong[] arr) {
+void bubbleSort(T)(ref T[] arr) {
 	for(ulong i = 0; i < arr.length - 1; i++)
 		for(ulong j = arr.length - 1; j > i; j--)
 			if(arr[j - 1] > arr[j])
-				swap(arr, j, j - 1);
+				swap!T(arr, j, j - 1);
 }
 
 /*
@@ -55,13 +55,13 @@ void bubbleSort(ref ulong[] arr) {
  * Best: O(n^2)
  * Average: O(n^2)
  */
-void selectionSort(ref ulong[] arr) {
+void selectionSort(T)(ref T[] arr) {
 	for(ulong i = 0; i < arr.length - 1; i++) {
 		ulong index = i;
 		for(ulong j = arr.length - 1; j > i; j--)
 			if(arr[j] < arr[index])
 				index = j;
-		swap(arr, i, index);
+		swap!T(arr, i, index);
 	}
 }
 
@@ -71,11 +71,11 @@ void selectionSort(ref ulong[] arr) {
  * Best: O(n^1.5)
  * Average: O(n^1.5)
  */
-void shellsort(ref ulong[] arr) {
-	void insertion(ref ulong[] arr, ulong n, ulong increment) {
+void shellsort(T)(ref T[] arr) {
+	void insertion(ref T[] arr, ulong n, ulong increment) {
 		for(ulong i = increment; i < n; i += increment)
 			for(ulong j = i; j >= increment && arr[j] < arr[j - increment]; j -= increment)
-				swap(arr, j, j - increment);
+				swap!T(arr, j, j - increment);
 	}
 	for(ulong i = arr.length / 3; i > 3; i /= 3)
 		for(ulong j = 0; j < i; j++)
@@ -89,8 +89,8 @@ void shellsort(ref ulong[] arr) {
  * Best: O(n)
  * Average: O(n log n)
  */
-void mergeSort(ref ulong[] arr) {
-	void merge(ref ulong[] arr, ref ulong[] temp, ulong left, ulong right) {
+void mergeSort(T)(ref T[] arr) {
+	void merge(ref T[] arr, ref T[] temp, ulong left, ulong right) {
 		if(left == right)
 			return;
 		ulong mid = (left + right) / 2;
@@ -109,7 +109,7 @@ void mergeSort(ref ulong[] arr) {
 			else arr[cur] = temp[j++];
 		}
 	}
-	ulong[] temp = new ulong[arr.length];
+	auto temp = new T[arr.length];
 	merge(arr, temp, 0UL, arr.length - 1);
 }
 
@@ -118,12 +118,10 @@ void mergeSort(ref ulong[] arr) {
  * Worst: O(kn)
  * Best: O(kn)
  */
-void radixSort(ref ulong[] arr) {
+void radixSort(T)(ref T[] arr) {
 	if(arr.length == 0)
 		return;
-	//ulong[][] buckets;
-	//buckets.length = 10;
-	ulong[][10] buckets;
+	T[][10] buckets;
 	ulong powTen = 1;
 	ulong max = maxValue(arr);
 	for(; max != 0; max /= 10, powTen *= 10) {
@@ -153,7 +151,7 @@ unittest {
 	ulong[] answer = [1, 2, 3, 5, 9, 10];
 	ulong[] test2 = 11 ~ answer;
 	ulong[] answer2 = answer ~ 11;
-	auto funcs = [&insertionSort, &bubbleSort, &selectionSort, &shellsort, &mergeSort, &radixSort];
+	auto funcs = [&insertionSort!ulong, &bubbleSort!ulong, &selectionSort!ulong, &shellsort!ulong, &mergeSort!ulong, &radixSort!ulong];
 
 	foreach(i, f; funcs) {
 		assert(testSortingAlgorithm(test, answer, f), "Sorting function index " ~ to!string(i) ~ " failed");
@@ -162,16 +160,16 @@ unittest {
 }
 
 void main() {
-	auto funcs = [&insertionSort, &bubbleSort, &selectionSort, &shellsort, &mergeSort, &radixSort];
+	auto funcs = [&insertionSort!int, &bubbleSort!int, &selectionSort!int, &shellsort!int, &mergeSort!int, &radixSort!int];
 	auto names = ["Insertion Sort", "Bubble Sort", "Selection Sort", "Shellsort", "Merge Sort", "Radix Sort (LSD)"];
-	ulong[] data;
+	int[] data;
 	ulong values;
 
 	writeln("Enter the number of random values to sort:");
 	readf("%d", &values);
 
 	for(ulong i = 0; i < values; i++)
-		data ~= uniform(0, ulong.max);
+		data ~= uniform(0, int.max);
 
 	foreach(i, f; funcs) {
 		auto temp = data.dup;
