@@ -24,6 +24,15 @@ ulong maxValue(T)(ref T[] arr) {
 	return max;
 }
 
+//Make sure arr is sorted ascendingly
+bool isSorted(T)(ref T[] arr) {
+	ulong i = 1;
+	while(i < arr.length)
+		if(arr[i] < arr[i++ - 1]) //If this one is smaller than the last
+			return false;
+	return true;
+}
+
 /*
  * Insertion Sort 
  * Worst: O(n^2)
@@ -138,6 +147,35 @@ void radixSort(T)(ref T[] arr) {
 	}
 }
 
+/*
+ * Quicksort
+ * Worst: O(n^2)
+ * Best: O(n log n)
+ * Average: O(n log n)
+ */
+void quicksort(T)(ref T[] arr) {
+	ulong partition(ref T[] arr, ulong left, ulong right, ulong pivotIndex) {
+		T pivotValue = arr[pivotIndex];
+		swap!T(arr, pivotIndex, right);
+		ulong storeIndex = left;
+		for(ulong i = left; i < right; i++)
+			if(arr[i] < pivotValue)
+				swap!T(arr, i, storeIndex++);
+		swap!T(arr, storeIndex, right);
+		return storeIndex;
+	}
+	void quick(ref T[] arr, ulong left, ulong right) {
+		if(left < right) {
+			ulong pivot = left + (right - left) / 2;
+			pivot = partition(arr, left, right, pivot);
+			if(pivot != 0) {
+			quick(arr, left, pivot - 1);
+			quick(arr, pivot + 1, right);}
+		}
+	}
+	quick(arr, 0UL, arr.length - 1);
+}
+
 unittest {
 	//Helper for testing sorting functions
 	bool testSortingAlgorithm(ulong[] test, ulong[] answer, void function(ref ulong[]) func) {
@@ -151,17 +189,19 @@ unittest {
 	ulong[] answer = [1, 2, 3, 5, 9, 10];
 	ulong[] test2 = 11 ~ answer;
 	ulong[] answer2 = answer ~ 11;
-	auto funcs = [&insertionSort!ulong, &bubbleSort!ulong, &selectionSort!ulong, &shellsort!ulong, &mergeSort!ulong, &radixSort!ulong];
+	auto funcs = [&insertionSort!ulong, &bubbleSort!ulong, &selectionSort!ulong, &shellsort!ulong, &mergeSort!ulong, &radixSort!ulong, &quicksort!ulong];
 
 	foreach(i, f; funcs) {
 		assert(testSortingAlgorithm(test, answer, f), "Sorting function index " ~ to!string(i) ~ " failed");
 		assert(testSortingAlgorithm(test2, answer2, f), "Sorting function index " ~ to!string(i) ~ " failed");
 	}
+	assert(!isSorted(test), "isSorted() failed");
+	assert(isSorted(answer), "isSorted() failed");
 }
 
 void main() {
-	auto funcs = [&insertionSort!int, &bubbleSort!int, &selectionSort!int, &shellsort!int, &mergeSort!int, &radixSort!int];
-	auto names = ["Insertion Sort", "Bubble Sort", "Selection Sort", "Shellsort", "Merge Sort", "Radix Sort (LSD)"];
+	auto funcs = [&insertionSort!int, &bubbleSort!int, &selectionSort!int, &shellsort!int, &radixSort!int, &mergeSort!int, &quicksort!int];
+	auto names = ["Insertion Sort", "Bubble Sort", "Selection Sort", "Shellsort", "Radix Sort", "Merge Sort", "Quicksort"];
 	int[] data;
 	ulong values;
 
@@ -176,6 +216,8 @@ void main() {
 		auto start = Clock.currTime();
 		f(temp);
 		auto end = Clock.currTime();
-		writeln(names[i] ~ ":   " ~ to!string(end - start));
-	}	
+		if(isSorted(temp))
+			writeln(names[i] ~ ":\t\t" ~ to!string(end - start));
+		else writeln("Failed " ~ names[i] ~ ":\t\t" ~ to!string(end - start));
+	}
 }
