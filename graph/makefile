@@ -1,22 +1,23 @@
 # Makefile
 # Copyright 2012 James Otten <james_otten@lavabit.com>
 
-DC = dmd
+DC = ldmd2
 DFLAGS = -unittest -debug -gc -w -wi
-RFLAGS = -inline -O -release
+LDFLAGS = -debug -g -w -wi
+RFLAGS = -inline -O -release -w -wi
 
-LIBOBJS = graph.o deque.o breadthFirstSearch.o
+LIBRARY = graph.a
 LIBSRC = graph.d deque.d breadthFirstSearch.d
 TARGET = graphTest
 SOURCE = graphTest.d
 
-all: $(LIBOBJS) $(TARGET)
+all: $(LIBRARY) $(TARGET)
 
-$(TARGET): $(OBJS)
-	$(DC) $^ $(LIBOBJS) $(SOURCE) -of$@
+$(TARGET): $(LIBRARY) $(SOURCE) 
+	$(DC) $(SOURCE) $(LIBRARY) $(DFLAGS) -of$@
 
-$(LIBOBJS): $(LIBSRC)
-	$(DC) $^ $(DFLAGS) -c
+$(LIBRARY) : $(LIBSRC)
+	$(DC) -lib $(LIBSRC) $(LDFLAGS) -of$@
 
 release: DFLAGS = $(RFLAGS)
 release: all
@@ -25,3 +26,4 @@ release: all
 clean:
 	rm -f *.o
 	rm -f $(TARGET)
+	rm -f $(LIBRARY)

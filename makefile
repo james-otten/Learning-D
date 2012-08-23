@@ -1,9 +1,9 @@
 # Makefile
 # Copyright 2012 James Otten <james_otten@lavabit.com>
 
-DC = dmd
-DFLAGS = -unittest -debug -gc -w -wi
-RFLAGS = -inline -O -release
+DC = ldmd2
+DFLAGS = -unittest -debug -g -w -wi
+RFLAGS = -inline -O -release -w -wi
 
 SRCDIR = .
 OBJDIR = obj
