@@ -6,12 +6,6 @@
 import std.stdio;
 import std.conv;
 
-int toInt(char d) {
-	int ret = to!int(d);
-	assert(ret >= 48 && ret <= 57); //ASCII
-	return ret - 48;
-}
-
 //Returns the product of all the numbers in arr
 int product(int[] arr) {
 	int ret = 1;
@@ -24,7 +18,9 @@ int product(int[] arr) {
 int greatestProduct(in string num, in int N) {
 	assert(N > 0);
 	assert(num.length >= N);
+
 	int[] set;
+	auto toInt = (char d) {return to!int(d) - 48;};
 	for(int i = 0; i < N; i++) //Fill set with the first
 		set ~= toInt(num[i]); //Because we remove an element in our loop
 	int maxIndex = 0;
